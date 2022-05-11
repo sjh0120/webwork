@@ -57,6 +57,27 @@
         	border-radius: 40%
         }
         
+        /*
+        .bxslider a{
+		display: inline-block;
+		position: relative;
+		top: 17px;
+		height:220px;
+		width: 100px;
+		background-color:black;
+		opacity:0.4;
+		color:white;
+		line-height:200px;
+		text-decoration: none;
+		font-weight:bold;
+		font-size: 100px;
+		text-align: center;
+		}
+		.bxslider a:last-child{
+			left:700px;
+		}
+		*/
+        
     </style>
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/jquery.bxslider.js"></script>
@@ -67,7 +88,9 @@
             minSlides:2,
             maxSlides:3,
             startSlide:0,
-            moveSlides:1
+            moveSlides:1,
+            //controls:false//컨트롤끄기
+            
         };
         $(document).ready(function(){
             $('.bxslider').bxSlider(option);
@@ -76,7 +99,8 @@
         function slideUp(){
         	$('.card_items:hover .main_block>div')
 			.animate({marginTop:parseInt($('.card_items:hover .main_block>div').css('margin-top'))-10+'px'},100);
-        	//console.log($('.card_items:hover .main_block>div').css('margin-top'));
+        	
+        	console.log($('.card_items:hover .main_block>div').css('margin-top'));
         	//끝나는 위치가 제각각이네....
         }
         
@@ -109,7 +133,6 @@
 		conn = DriverManager.getConnection(url, "user01", "1234");
 		stmt = conn.createStatement();
 		rs = stmt.executeQuery(sql);
-		int i=1;
 	%>
     <div class="bxslider">
         <%
