@@ -9,6 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/carditem.css">
     <style rel="stylesheet" type="text/css">
     	body{
     		background-color: gray;
@@ -21,49 +22,6 @@
             margin: 0px auto;
             width:930px;
             height:730px;
-        }
-        .card_items{
-        	display:block;
-            padding: 0px;
-            padding-bottom: 30px;
-            background-color: white;
-            border: 0px solid black;
-            border-radius: 8%;
-            opacity: 0.5;
-            height:700px;
-        }
-        .card_items:hover{
-            opacity: 0.9;
-            background-color: green;
-            color: white;
-        }
-        .card_items>.header_block{
-        	display:block;
-        	padding:0px;
-            margin: 0px;
-            height:100px;
-            background-color: red;
-        }
-        .card_items>div>h1{
-        	text-align: center;
-        }
-        .card_items>.main_block{
-        	display:block;
-        	height:130px;
-        	background-color:aqua;
-        	margin-bottom:10px;
-        	overflow:hidden;
-        }
-        .card_items>.main_block>div>p{
-        	padding: 0px;
-            margin-left: 10px;
-        }
-        .card_items>p{
-            padding: 0px;
-            margin-left: 10px;
-        }
-        .card_items>img{
-        	width:300px;
         }
         .button_zone{
         	display:block;
@@ -127,7 +85,7 @@
         		interval=setInterval(slideUp,100);
         	});
         	$('.main_block>div').mouseout(function(){
-            		moving.clearQueue().stop();
+            		moving.clearQueue().stop().delay(2000);
             		clearInterval(interval);
             		$('.main_block>div')
             			.animate({marginTop:'0px'},0)
