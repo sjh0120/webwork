@@ -123,6 +123,7 @@
 	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
+		// 이벤트 callback
 		var delEvent=function(e){
 			e.preventDefault();
 			delOne($(e.target).parent().parent().find('[type=number]').val());
@@ -147,21 +148,24 @@
 			$(e.target).off('submit',detailEvent).on('submit',editEvent);
 			return false;
 		}
+		var menu1Click=function(){
+			$('#content>.row').hide().eq(0).show();
+			return false;
+		};
+		var menu2Click=function(){
+			$('#content>.row').hide().eq(1).show();
+			return false;
+		};
+		var menu3Click=function(){
+			$('#content>.row').hide().eq(2).show();
+			getList();
+			return false;
+		};
 		
-		$('#popup').hide();
 		
-		$('#bx>ul').bxSlider({
-			slideWidth:800,
-			minSlides:1,
-			maxSlides:1,
-			moveSlides:1,
-			auto:true,
-			pager:false,
-			prevText:'<',
-			nextText:'>'
-		});
+		// ajax
 		var delOne=function(param){
-			$.post('bbx/delete.jsp','empno='+param,function(){
+			$.post('bbs/delete.jsp','empno='+param,function(){
 				$('#menu a').eq(2).click();
 				$('#popup').click();
 			});
@@ -179,8 +183,7 @@
 					$('#popup').click();
 				}
 			});
-		}
-		
+		};
 		var getOne=function(empno){
 			$('#popup').find('h2').text('상세페이지');
 			$('#popup').find('button')
@@ -197,7 +200,6 @@
 			
 			$('#popup').show();
 		};
-		
 		var getList=function(){
 			$('#list-group').html('<div><span>ename</span></div>')
 			$.getJSON('bbs/list.jsp',function(data){
@@ -213,20 +215,27 @@
 				});
 			});
 		};
+		var addList=function(param){
+			/* $.post('bbs/insert.jsp',param,function(){
+				$('#menu a').eq(2).click();
+				$('#popup').click();
+			}); */
+			$.ajax({
+				url:'bbs/insert.jsp',
+				data:param,
+				type:'post',
+				error:function(xhr,a,b){
+					$('#popup .err').remove();//여기도 넣어야할듯
+					$('#popup h2').before('<div class="err">에러발생('+b+')</div>');
+				},
+				success:function(){
+					$('#menu a').eq(2).click();
+					$('#popup').click();
+				}
+			});
+		};
 		
-		var menu1Click=function(){
-			$('#content>.row').hide().eq(0).show();
-			return false;
-		};
-		var menu2Click=function(){
-			$('#content>.row').hide().eq(1).show();
-			return false;
-		};
-		var menu3Click=function(){
-			$('#content>.row').hide().eq(2).show();
-			getList();
-			return false;
-		};
+		// 이벤트 등록
 		$('#menu a')
 			.first()
 			.click(menu1Click)
@@ -253,27 +262,21 @@
 			$('#popup').show();
 			return false;
 		});
-		var addList=function(param){
-			/* $.post('bbs/insert.jsp',param,function(){
-				$('#menu a').eq(2).click();
-				$('#popup').click();
-			}); */
-			$.ajax({
-				url:'bbs/insert.jsp',
-				data:param,
-				type:'post',
-				error:function(xhr,a,b){
-					$('#popup .err').remove();//여기도 넣어야할듯
-					$('#popup h2').before('<div class="err">에러발생('+b+')</div>');
-				},
-				success:function(){
-					$('#menu a').eq(2).click();
-					$('#popup').click();
-				}
-			});
-		};
 		$('#popup form').on('submit',addEvent);
 		
+		// init
+		$('#popup').hide();
+		
+		$('#bx>ul').bxSlider({
+			slideWidth:800,
+			minSlides:1,
+			maxSlides:1,
+			moveSlides:1,
+			auto:true,
+			pager:false,
+			prevText:'<',
+			nextText:'>'
+		});
 		$('#menu a').first().click();
 	});
 	
