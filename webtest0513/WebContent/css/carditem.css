@@ -2,7 +2,6 @@
         	display:block;
             padding: 0px;
             padding-bottom: 30px;
-            background-color: white;
             border: 0px solid black;
             border-radius: 8%;
             opacity: 0.5;
@@ -20,15 +19,16 @@
         	padding:0px;
             margin: 0px;
             height:100px;
-            background-color: red;
         }
         .card_items>div>h1{
         	text-align: center;
         }
+        .main_block{
+        	background-color:green;
+        }
         .card_items>.main_block{
         	display:block;
         	height:130px;
-        	background-color:aqua;
         	margin-bottom:10px;
         	overflow:hidden;
         }
