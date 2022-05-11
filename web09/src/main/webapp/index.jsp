@@ -1,10 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+ <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/mygrid.css">
 	<style rel="stylesheet" type="text/css">
+	
 	#header{
 	}
 	#header h1{
@@ -122,6 +123,10 @@
 	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
+		var delEvent=function(e){
+			e.preventDefault();
+			delOne($(e.target).parent().parent().find('[type=number]').val());
+		}
 		var addEvent=function(e){
 			var param=$(e.target).serialize();
 			addList(param);
@@ -133,9 +138,9 @@
 			$(e.target).off('submit',editEvent).on('submit',detailEvent);
 			return false;
 		};
-		
 		var detailEvent=function(e){
 			$(e.target).prev().text('수정페이지');
+			$(e.target).find('button').eq(1).text('취소').off('click',delEvent);
 			$(e.target).find('input').each(function(idx,ele){
 				if(idx!=0) $(ele).removeProp('readonly');
 			});
@@ -155,7 +160,12 @@
 			prevText:'<',
 			nextText:'>'
 		});
-		
+		var delOne=function(param){
+			$.post('bbx/delete.jsp','empno='+param,function(){
+				$('#menu a').eq(2).click();
+				$('#popup').click();
+			});
+		};
 		var editOne=function(param){
 			$.ajax({
 				type:'post',
@@ -173,7 +183,9 @@
 		
 		var getOne=function(empno){
 			$('#popup').find('h2').text('상세페이지');
-			$('#popup').find('button').first().text('수정');
+			$('#popup').find('button')
+							.first().text('수정')
+							.next().text('삭제').on('click',delEvent);
 			$('#popup').find('input').prop('readonly',true);
 			$.getJSON('bbs/detail.jsp','empno='+empno,function(data){
 				$('#popup').find('input').eq(0).val(data.root[0].empno);
@@ -230,7 +242,9 @@
 			$('#popup form input').val('');
 			$('#popup .err').remove();
 			$('#popup').find('h2').text('입력페이지');
-			$('#popup').find('button').first().text('입력');
+			$('#popup').find('button')
+							.first().text('입력')
+							.next().text('취소').off('click',delEvent);
 			$('#popup').find('input').removeProp('readonly');
 			$('#popup form').off('submit',detailEvent).on('submit',addEvent);
 			$('#popup').hide();
@@ -266,6 +280,7 @@
 	</script>
 </head>
 <body>
+
 	<div class="container">
 		<div id="header" class="row">
 			<div class="grid12">
@@ -325,7 +340,7 @@
 			<form action="#" method="post">
 				<div>
 					<label for="empno">empno</label>
-					<input type="text" name="empno" id="empno"/>
+					<input type="number" name="empno" id="empno"/>
 				</div>
 				<div>
 					<label for="ename">ename</label>

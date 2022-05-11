@@ -31,9 +31,11 @@ Connection conn=null;
 Statement stmt=null;
 
 try{
-	conn=DriverManager.getConnection(url,user,password);
-	stmt=conn.createStatement();
-	stmt.executeUpdate(sql);
+	if(request.getMethod().equals("POST")){
+		conn=DriverManager.getConnection(url,user,password);
+		stmt=conn.createStatement();
+		stmt.executeUpdate(sql);
+	}
 }finally{
 	if(stmt!=null)stmt.close();
 	if(conn!=null)conn.close();
