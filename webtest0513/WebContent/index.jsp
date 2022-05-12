@@ -9,48 +9,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/jquery.bxslider.css">
-    <style rel="stylesheet" type="text/css">
-    /*팝업css*/
-    #popup{
-		position: fixed;
-		left: 0px;
-		top:0px;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0,0,0,0.5);
-	}
-	#popup>div{
-		background-color: white;
-		width:400px;
-		height:400px;
-		margin: 100px auto;
-		padding: 50px;
-		box-sizing:border-box;/*사이즈 고정*/
-		border-radius: 20px;
-	}
-	#popup>div>form{}
-	#popup>div>form>div{
-		margin-bottom:10px;
-		text-align: center;
-	}
-	#popup>div>form>div>label{
-		display:inline-block;
-		width:40%;
-		background-color: darkgray;
-	}
-	#popup>div>form>div>input{
-		width:50%;
-	}
-	#popup>div>form>div>button{
-		
-	}
-	#popup>div>.err{
-		background-color: red;
-		color: white;
-		text-align: center;
-		font-style:italic;
-	}
-    </style>
+    <link rel="stylesheet" href="css/carditem.css">
+    <link rel="stylesheet" href="css/popupwindow.css">
     <style rel="stylesheet" type="text/css">
     	body{
     		transition: background-color 1s ease;
@@ -59,75 +19,12 @@
         	padding-top:10px;
             padding-bottom:10px;
             margin: 0px auto;
-            
-        }
-        /*여기부터*/
-        .card_items{
-        	display:block;
-            padding: 0px;
-            padding-bottom: 0px;
-            border: 0px solid black;
-            border-radius: 13px 13px 13px 13px;
-            opacity: 0.5;
-            height:698px;
-        }
-        .card_items:hover{
-            opacity: 0.9;
-            background-color: rgb(230,230,230);
-        }
-        .card_items:hover .main_block>div>p{
-        	color: red;
-        }
-        .card_items>.header_block{
-        	display:block;
-        	padding:0px;
-            margin: 0px;
-            height:100px;
-            border:1px solid gray;
-        	border-radius: 15px;
-        }
-        .card_items>div>h1{
-        	text-align: center;
-        	margin-top: 5px;
-        	margin-left: 5px;
-        	margin-right: 5px;
-        	
-        }
-        .main_block{
-        	
         }
         .bx-viewport{
         	margin-bottom:10px;
         }
-        .card_items>.main_block{
-        	display:block;
-        	height:110px;
-        	margin-bottom:0px;
-        	overflow:hidden;
-        	border:1px solid gray;
-        	border-radius: 15px;
-        }
-        .card_items>.main_block>div>p{
-        	display:block;
-        	padding: 0px;
-            margin-left: 10px;
-            margin-right: 10px;
-            margin-top:5px;
-            margin-bottom:0px;
-            height: 90px;
-        }
-        .card_items>p{
-            padding: 0px;
-            margin-top:5px;
-            margin-bottom:5px;
-            padding-left: 20px;
-            border:1px solid gray;
-        	border-radius: 15px;
-        }
-        .card_items>img{
-        	padding-top:10px;
-        	width:300px;
-        }
+        /*여기부터*/
+        
         /*여기까지*/
         /*
         .bx-controls-direction a{
@@ -149,7 +46,7 @@
         .bx-wrapper{
         	top:100px;
             margin: 0px auto;
-            width:930px;
+            max-width:930px;
             height:720px;
         }
         .button_zone{
@@ -188,25 +85,39 @@
         	border : 0.3px solid black;
         }
         .panel {
-		  /* min height incase content is higher than window height */
 		  min-height: 1000px;
 		  display: flex;
 		  justify-content: space-around;
 		  align-items: center;
-		  /* outline: 10px solid hotpink; */
-		  /* turn above on to see the edge of panels */
 		}
-		
+		#intro>*{
+			position:relative;
+			margin-left: -500px;
+		}
+		#intro>p>a{
+			text-decoration: none;
+			color: black;
+		}
 		.color-violet {
-		  background-color: rgba(122,78,171,0.8);
+		  background-color: rgba(54,55,58,0.4);
 		}
 		.color-gray {
-		  background-color: rgba(10,10,10,0.5);
+		  background-color: rgba(32,33,36,0.6);
 		}
 		
 		#footer{
-			
+			display :block;
+			height : 100px;
+			text-align: center;
+			padding-bottom: 10px;
+			line-height: 30px;
+			padding-top:10px;
 		}
+		#footer>a{
+			text-decoration: none;
+			color: black;
+		}
+		
     </style>
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/jquery.bxslider.js"></script>
@@ -222,8 +133,10 @@
             //controls:false//컨트롤끄기
             
         };
+        var slider;
         $(document).ready(function(){
-            $('.bxslider').bxSlider(option);
+            slider=$('.bxslider').bxSlider(option);
+            var current = slider.getCurrentSlide();
         });
         var interval;
         function slideUp(){
@@ -236,44 +149,57 @@
         
         $(function(){
         	//팝업메뉴
-        	$('#popup').hide();
+        	$('#insert_popup').hide();
         	$('.button_zone_insert').click(function(){
-    			$('#popup').show();
+    			$('#insert_popup').show();
     			return false;
     		});
-        	 $('#popup>div').find('button').eq(2).click(function(){
-        		$('#popup').hide();
+        	$('#insert_popup>div').find('button').eq(2).click(function(){
+        		$('#insert_popup').hide();
+        		$('#insert_popup .err').remove();
     			return false;
-        	
-        	}); 
-        	var addEvent=function(e){
-    			var param=$(e.target).serialize();
-    			addList(param);
-    			return false;
-    		};
-    		
+        	});
     		var addList=function(param){
-    			/* $.post('bbs/insert.jsp',param,function(){
-    				$('#menu a').eq(2).click();
-    				$('#popup').click();
-    			}); */
     			$.ajax({
     				url:'db/insert.jsp',
     				data:param,
     				type:'post',
     				error:function(xhr,a,b){
-    					console.log(param);
-    					//$('#popup .err').remove();//여기도 넣어야할듯
-    					//$('#popup h2').before('<div class="err">에러발생('+b+')</div>');
+    					$('#insert_popup .err').remove();
+    					$('#insert_popup h2').before('<div class="err">공백, 중복된 이름은 입력할 수 없습니다</div>');
     				},
     				success:function(){
-    					//$('#menu a').eq(2).click();
-    					//$('#popup').click();
+    					console.log("성공");
+    					location.reload();
     				}
     			});
     		};
-    		$('#popup form').on('submit',addEvent);
-        	
+    		
+    		$('#insert_popup form').on('submit',function(e){
+    			var param=$(e.target).serialize();
+    			addList(param);
+    			return false;
+    		});
+    		
+    		$('#detail_popup').hide();
+        	$('.bx-wrapper').click(function(){
+        		var total=slider.getSlideCount();//토탈슬라이드 갯수
+        		var current = slider.getCurrentSlide()+2;//현재슬라이드 번호
+        		if(current>total) current=current-total;
+        		console.log(current);//current = db순서
+    			$('#detail_popup').show();
+        		//디테일창 안에서의 html db값으로 변경 => 디테일창 완성
+    			return false;
+    		});
+        	$('.bx-controls-direction a').click(function(){
+        		//event.preventDefault();
+        		event.stopImmediatePropagation();
+        	});
+        	$('#detail_popup>div').find('button').eq(0).click(function(){
+        		$('#detail_popup').hide();
+        		
+    			return false;
+        	});
         	
         	//애니메이션
         	var moving=$('.main_block>div').mouseover(function(){
@@ -291,7 +217,6 @@
     <script type="text/javascript">
     //배경색 변경
     $(window).scroll(function() {
-    	  
     	  // selectors
     	  var $window = $(window),
     	      $body = $('body'),
@@ -325,12 +250,12 @@
 </head>
 <body>
 	<div class="panel" data-color="violet">
-	    <div>
-	      <h1>Magic scrolling colours</h1>
-	      <p>Scroll to animate the background colour of the body as a full height panel becomes visible.</p>
-	      <p>I have tried to comment the code, particurly the JavaScript, as much as possible. I hope it's clear to understand.</p>
-	      <p>If you have any questions my twitter is <a href="https://twitter.com/daveredfern">@daveredfern</a>.</p>
-	  </div>
+	    <div id="intro">
+	      <h1>Movie Board</h1>
+	      <p>영화 정보를 설명해주는 사이트입니다.</p>
+	      <p>영화에 대한 정보는 네이버에서 가져왔습니다.</p>
+	      <p>출처 : &copy; <a href="https://movie.naver.com/">https://movie.naver.com/</a></p>
+	  	</div>
 	</div>
 	<div class="panel"  data-color="gray">
     <%
@@ -353,10 +278,10 @@
 				while (rs.next()) {
 			%>
 	        <div class="card_items">
-	        <div class="header_block"><h1><%=rs.getString(2) %></h1></div>
-	        <img src=<%=rs.getString(3) %>" title="imga01">
-	        <p>장르 : <%=rs.getString(4) %></p>
-	        <div class="main_block"><div class="num<%=rs.getInt(1)%>"><p>내용 : <%=rs.getString(5) %></p></div></div>
+		        <div class="header_block"><h1><%=rs.getString("movie_name") %></h1></div>
+		        <div id="image_zone"><img src="<%=rs.getString("movie_image") %>"></div>
+		        <p>장르 : <%=rs.getString("movie_genre") %></p>
+		        <div class="main_block"><div class="num<%=rs.getInt("num")%>"><p>내용 : <%=rs.getString("movie_detail") %></p></div></div>
 	        </div>
 	    <%}
 		}catch (Exception e) {
@@ -379,17 +304,16 @@
     </div>
     
     <div id="footer">
-    <address>
-			서울특별시 서초구 서초대로74길33 비트빌 3층
-			</address>
-			&copy; Copyright by bitacademy co.ltd. All rights reserved.
+    <hr>
+    영화 정보를 설명해주는 사이트입니다.<br/>
+	정보 출처 : &copy; <a href="https://movie.naver.com/">https://movie.naver.com/</a>
     </div>
     
-    <div id="popup">
+    <div id="insert_popup">
 		<div>
 			<h2>입력 페이지</h2>
-			<form action="#" method="post">
-				<div>
+			<form action="#" method="POST">
+				<div id="input_box">
 					<label for="movie_name">제목</label>
 					<input type="text" name="movie_name" id="movie_name"/>
 				</div>
@@ -408,6 +332,28 @@
 				<div>
 					<button>입력</button>
 					<button type="reset">취소</button>
+					<button type="button">뒤로</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="detail_popup">
+		<div>
+			<h2>상세 페이지</h2>
+			<form action="#" method="POST">
+				<div id="input_box">
+					<label for="movie_name">제목</label>
+				</div>
+				<div>
+					<label for="movie_image">이미지</label>
+				</div>
+				<div>
+					<label for="movie_genre">장르</label>
+				</div>
+				<div>
+					<label for="movie_detail">줄거리</label>
+				</div>
+				<div>
 					<button type="button">뒤로</button>
 				</div>
 			</form>
