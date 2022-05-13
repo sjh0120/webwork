@@ -143,7 +143,7 @@
         	$('.card_items:hover .main_block>div')
 			.animate({marginTop:parseInt($('.card_items:hover .main_block>div').css('margin-top'))-10+'px'},100);
         	
-        	console.log($('.card_items:hover .main_block>div').css('margin-top'));
+        	//console.log($('.card_items:hover .main_block>div').css('margin-top'));
         	//끝나는 위치가 제각각이네....
         }
         
@@ -169,7 +169,6 @@
     					$('#insert_popup h2').before('<div class="err">공백, 중복된 이름은 입력할 수 없습니다</div>');
     				},
     				success:function(){
-    					console.log("성공");
     					location.reload();
     				}
     			});
@@ -189,6 +188,7 @@
         		console.log(current);//current = db순서
     			$('#detail_popup').show();
         		//디테일창 안에서의 html db값으로 변경 => 디테일창 완성
+        		
     			return false;
     		});
         	$('.bx-controls-direction a').click(function(){

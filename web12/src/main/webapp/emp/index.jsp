@@ -1,0 +1,98 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<jsp:include page="../template/head.jsp">
+	<jsp:param value=".." name="root"/>
+</jsp:include>
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+
+</script>
+</head>
+<%@ page import="java.sql.*, com.bit.util.*, java.util.*" %>
+<%!
+Connection conn;
+Statement stmt;
+ResultSet rs;
+
+public List<EmpDto> getList() throws SQLException{
+	String sql="select * from emp order by empno";
+	List<EmpDto> list=new ArrayList<EmpDto>();
+	
+	try{
+		conn=DBServer.getConnection();
+		stmt=conn.createStatement();
+		rs=stmt.executeQuery(sql);
+		
+		while(rs.next()){
+			EmpDto bean1=new EmpDto();
+			bean1.setEmpno(rs.getInt("empno"));
+			bean1.setEname(rs.getString("ename"));
+			//bean1.setEname(rs.getString("ename").length()>3?rs.getString("ename").substring(0,3)+"...":rs.getString("ename"));
+			bean1.setSal(rs.getInt("sal"));
+			list.add(bean1);
+		}
+	}finally{
+		if(rs!=null)rs.close();
+		if(stmt!=null)stmt.close();
+		if(conn!=null)conn.close();
+	}
+	
+	return list;
+}
+%>
+<body>
+<nav>
+	<h1><a href="../">비트 교육센터</a></h1>
+	<jsp:useBean id="login" class="com.bit.util.EmpDto" scope="session"></jsp:useBean>
+	<ul>
+		<li><a href="../">HOME</a></li>
+		<li><a href="../intro.jsp">INTRO</a></li>
+		<li><a href="./">LIST</a></li>
+		<%if(login.isResult()){ %>
+		<li><a href="../login/logout.jsp">LOGOUT</a></li>
+		<%} else{%>
+		<li><a href="../login/form.jsp">LOGIN</a></li>
+		<%} %>
+	</ul>
+	<%if(login.isResult()){ %>
+	<span><jsp:getProperty property="ename" name="login"/>님 로그인 중...</span>
+	<%} %>
+</nav>
+<div class="container">
+	<div class="row">
+		<div class="grid12">
+			<!-- content start -->
+			<h2>리스트 페이지</h2>
+			<div class="table">
+			<%for(EmpDto bean : getList()){%>
+				<div>
+					<a href="detail.jsp?empno=<%=bean.getEmpno() %>">
+						<span><%=bean.getEmpno() %></span>
+						<span><%=bean.getEname().length()>3?bean.getEname().substring(0,3)+"...":bean.getEname() %></span>
+						<span><%=bean.getSal() %></span>
+						
+					</a>
+				</div>
+			<%
+			}
+			%>
+			</div>
+			<p><a class="btn btn-primary" href="add.jsp">입력</a>
+			<!-- content end -->
+		</div>
+	</div>
+	<div class="row">
+		<div id="footer" class="grid12">
+		&copy; Copyright by bitacademy co.ltd. All rights reserved. 
+		</div>
+	</div>
+</div>
+</body>
+</html>

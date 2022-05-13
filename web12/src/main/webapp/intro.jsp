@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <jsp:include page="template/head.jsp"></jsp:include>
 <style type="text/css">
-	
+
 </style>
 <script type="text/javascript">
 
@@ -35,14 +35,8 @@
 	<div class="row">
 		<div class="grid12">
 			<!-- content start -->
-			<img alt="" src="imgs/index.png">
-			<jsp:useBean id="obj" class="com.bit.util.EmpDto" scope="request">
-			<%
-				obj.setEname("아무개");
-			%>
-			</jsp:useBean>
-			<p><jsp:getProperty property="ename" name="obj" /></p>
-			 
+			<!-- <img alt="" src="https://www.bitacademy.com/img/main_bn_0503.png"> -->
+			<img alt="" src="https://www.bitacademy.com/img/main_bn_0414_1.png">
 			<!-- content end -->
 		</div>
 	</div>
