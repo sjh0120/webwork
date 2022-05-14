@@ -49,7 +49,7 @@ public class DBcrud {
 		}
 	}
 	
-	public MovieDto detailOne(int num) throws ClassNotFoundException,SQLException{
+	public MovieDto detailOne(Number num) throws ClassNotFoundException,SQLException{
 		MovieDto movie = new MovieDto();
 		String sql="select * from movie_board where="+num;
 		try(
@@ -63,8 +63,9 @@ public class DBcrud {
 				movie.setMovie_genre(rs.getString("movie_genre"));
 				movie.setMovie_detail(rs.getString("movie_detail"));
 			}
-			return movie;
+			
 		}
+		return movie;
 	}
 	
 }

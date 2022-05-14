@@ -7,6 +7,10 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+if (current > total)
+	current = current - total;
+</script>
 <body>
 <%
 System.out.println(request.getMethod());

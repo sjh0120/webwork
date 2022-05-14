@@ -1,10 +1,18 @@
 package com.sjh0120.cinema;
 
 public class MovieDto {
-	private String movie_name="";
-	private String movie_image="";
-	private String movie_genre="";
-	private String movie_detail="";
+	private String movie_name;
+	private String movie_image;
+	private String movie_genre;
+	private String movie_detail;
+	private boolean result;
+	
+	public boolean isResult() {
+		return result;
+	}
+	public void setResult(boolean result) {
+		this.result = result;
+	}
 	private int num;
 	
 	public int getNum() {

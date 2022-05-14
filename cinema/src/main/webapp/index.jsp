@@ -15,7 +15,99 @@
 <link rel="stylesheet" href="css/base.css">
 <style rel="stylesheet" type="text/css">
 /*여기부터*/
+/*detail popup*/
+	#detail_popup{
+		position: fixed;
+		left: 0px;
+		top:0px;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.5);
+	}
+	#detail_popup>div{
+		background-color: white;
+		width:800px;
+		height:800px;
+		margin: 100px auto;
+		padding: 50px;
+		box-sizing:border-box;/*사이즈 고정*/
+		border-radius: 20px;
+	}
+	
+	
+	#detail_popup>div>form{}
+	#detail_popup>div>form>div{
+		margin-bottom:10px;
+		text-align: center;
+	}
+	#detail_popup>div>div>label{
+		width:20%;
+		background-color: darkgray;
+	}
+	#detail_popup>div>div>input{
+		width:50%;
+	}
+	#detail_popup>div>div>button{
+		
+	}
+	#detail_popup>div>.err{
+		background-color: red;
+		color: white;
+		text-align: center;
+		font-style:italic;
+	}
+	
+	#detail_popup>div>div:nth-child(2){
+		float: right;
+	}
 
+	#detail_popup>div>div>img{
+		display: block;
+		width: 200px;
+	}
+	 
+	#detail_table{
+		margin : 0px auto;
+		width : 600px;
+		height : 400px;
+		border: 1px solid black;
+		border-radius: 10px;
+		padding: 0px;
+		box-sizing: border-box;
+		overflow:hidden;
+	}
+	#detail_table>*{
+		text-align: center;
+	}
+	
+	#detail_table td{
+		border-bottom:1px solid black;
+	}
+	
+	#detail_table tr:nth-child(1)>td:last-child{
+		border-left:1px solid black;
+		width: 400px;
+	}
+	#detail_table tr:nth-child(1)>td:last-child>img{
+		width: 200px;
+	}
+		
+	#detail_table tr:last-child>td{
+		border-bottom:0px solid black;
+		overflow: hidden;
+	}
+	
+	#detail_table tr:last-child>td>p{
+		margin: 0px;
+		padding: 0px;
+	}
+	#detail_popup>div>button{
+		display: block;
+		width: 400px;
+		height: 30px;
+		margin: 20px auto;
+		border-radius: 20px;
+	}
 /*여기까지*/
 /*
         .bx-controls-direction a{
@@ -37,12 +129,18 @@
 
 </style>
 <script src="js/jquery-1.12.4.min.js"></script>
+<!-- 여기로 올림 -->
+
 <script src="js/jquery.bxslider.js"></script>
+
+
 <script type="text/javascript">
-	var option = {
+
+var current;
+var option = {
 		slideMargin : 10,
 		slideWidth : 300,
-		minSlides : 2,
+		minSlides : 1,
 		maxSlides : 3,
 		startSlide : 0,
 		moveSlides : 1,
@@ -53,7 +151,7 @@
 	var slider;
 	$(document).ready(function() {
 		slider = $('.bxslider').bxSlider(option);
-		var current = slider.getCurrentSlide();
+		current = slider.getCurrentSlide();
 	});
 	var interval;
 	function slideUp() {
@@ -65,13 +163,19 @@
 		//끝나는 위치가 제각각이네....
 	}
 
-	//여기
-	MovieDto movie=new MovieDto();
-	DBcrud db=new DBcrud();
-	//끝
-	
 	$(function() {
+		window.addEventListener('resize', function() {
+		    console.log(window.innerWidth);
+		    if(window.innerWidth > 980){
+				count=3;
+			}else if(window.innerWidth <=980 && window.innerWidth > 700 ){
+				count=2;
+			}else{
+				count=1;
+			}
+		});
 		//insert
+		//$('#insert_popup').hide();
 		$('#insert_popup').hide();
 		$('.button_zone_insert').click(function() {
 			$('#insert_popup').show();
@@ -105,21 +209,48 @@
 
 		//detail
 		$('#detail_popup').hide();
+		
 		$('.bx-wrapper').click(function() {
 			var total = slider.getSlideCount();//토탈슬라이드 갯수
-			var current = slider.getCurrentSlide() + 2;//현재슬라이드 번호
+			current = slider.getCurrentSlide() + 2;//현재슬라이드 번호
 			if (current > total)
 				current = current - total;
-			console.log(current);//current = db순서
-			movie=db.detailOne(current);
-			console.log(movie.toString());
+			
+			<%-- <%
+			DBcrud moviedetail2=new DBcrud();
+			MovieDto moviedetail_return2=moviedetail2.detailOne(3);
+			%> --%>
+			
+			//여기
+			//var items=document.getElementById('#detail_popup');
+			//$(items).show();
+			//$('#detail_popup>form').nth-children(0).last().html('test');
+			//$('#detail_popup').show();
+			//console.log(current);//current = db순서
 			//MovieDto movie=new MovieDto();
 			/* DBcrud db=new DBcrud();
 			movie=db.detailOne(current);
 			console.log(movie.toString()); */
 			//작업중
 			//detail.
-			$('#detail_popup').show();
+			
+			/* $.ajax({
+				type:'post',
+				url:'bbs/update.jsp',
+				data:param,
+				error:function(a,b,c){
+					console.log(b,c);
+				},
+				success:function(){
+					$('#menu a').eq(2).click();
+					$('#popup').click();
+				}
+			});
+			 */
+			$.post('db/detail.jsp','current='+current,function(){
+				$('#detail_popup').show();
+			});
+			
 			//디테일창 안에서의 html db값으로 변경 => 디테일창 완성
 
 			return false;
@@ -128,10 +259,15 @@
 			event.stopImmediatePropagation();
 		});
 		$('#detail_popup>div').find('button').eq(0).click(function() {
-			$('#detail_popup').hide();
+			//숨기기 + 내용 비우기
+			$.post('db/detailout.jsp',function(){
+				$('#detail_popup').hide();
+			});
+			//location.reload();
+			//끝
+			//$('#detail_popup').hide();
 			return false;
 		});
-		
 
 		//애니메이션
 		var moving = $('.main_block>div').mouseover(function() {
@@ -186,8 +322,13 @@ $(window)
 
 				}).scroll();
 </script>
-<title>Document</title>
+<title>Movie Theater</title>
 </head>
+<jsp:useBean id="moviedetail" class="com.sjh0120.cinema.MovieDto" scope="session"></jsp:useBean>
+<%
+	DBcrud movie=new DBcrud();
+	ArrayList<MovieDto> list= movie.getList();
+	%>
 <body>
 	<div class="panel" data-color="violet">
 		<div id="intro">
@@ -198,10 +339,6 @@ $(window)
 		</div>
 	</div>
 	<div class="panel" data-color="gray">
-	
-	<%
-	DBcrud movie=new DBcrud();
-	ArrayList<MovieDto> list= movie.getList();%>
 		<div class="bxslider">
 		<%
 		for(MovieDto movies : list){
@@ -236,8 +373,8 @@ $(window)
 
 	<div id="footer">
 		<hr>
-		영화 정보를 설명해주는 사이트입니다.<br /> 정보 출처 : &copy; <a
-			href="https://movie.naver.com/">https://movie.naver.com/</a>
+		영화 정보를 설명해주는 사이트입니다.<br/>
+		정보 출처 : &copy; <a href="https://movie.naver.com/">https://movie.naver.com/</a>
 	</div>
 
 	<div id="insert_popup">
@@ -268,26 +405,49 @@ $(window)
 			</form>
 		</div>
 	</div>
+	
 	<div id="detail_popup">
 		<div>
 			<h2>상세 페이지</h2>
 			<form action="#" method="POST">
-				<div id="input_box">
-					<label for="movie_name">제목</label>
-				</div>
-				<div>
-					<label for="movie_image">이미지</label>
-				</div>
-				<div>
-					<label for="movie_genre">장르</label>
-				</div>
-				<div>
-					<label for="movie_detail">줄거리</label>
-				</div>
-				<div>
-					<button type="button">뒤로</button>
-				</div>
 			</form>
+			<table id="detail_table">
+			<tr>
+			<td>제목</td>
+			<td rowspan="4"><img src=<jsp:getProperty property="movie_image" name="moviedetail"/> /></td>
+			</tr>
+			<tr>
+			<td><jsp:getProperty property="movie_name" name="moviedetail"/></td>
+			</tr>
+			<tr>
+			<td>장르</td>
+			</tr>
+			<tr>
+			<td><jsp:getProperty property="movie_genre" name="moviedetail"/></td>
+			</tr>
+			<tr>
+			<td colspan="2">줄거리</td>
+			</tr>
+			<tr>
+			<td colspan="2"><p><jsp:getProperty property="movie_detail" name="moviedetail"/></p></td>
+			</tr>
+			</table>
+				<!-- <div id="namebox">
+				
+				</div>
+				<div id="imgbox">
+					
+				</div>
+				<div id="genrebox">
+					<label for="movie_genre">장르</label>
+					<input type="text" readonly="readonly" value=''/>
+				</div>
+				<div id="detailbox">
+					<label for="movie_detail">줄거리</label>
+					<input type="text" readonly="readonly" value=''/>
+				</div>
+				<div> -->
+					<button type="button">뒤로</button>
 		</div>
 	</div>
 </body>
