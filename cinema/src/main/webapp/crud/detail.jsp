@@ -6,64 +6,13 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" media="screen and (min-width: 830px)" href="../css/cruddetail.css" />
+<link rel="stylesheet" type="text/css" media="screen and (max-width: 829px)" href="../css/cruddetailMini.css" />
 <style rel="stylesheet" type="text/css">
-.detailtable{
-	border: 2px solid black;
-	border-radius: 5px;
-	width: 800px;
-	height : 800px;
-	margin: 0px auto;
-}
-.detailtable td{
-	border-top : 1px solid black;
+body{
+background-color: rgba(32, 33, 36, 0.6);
 }
 
-/*제목*/
-.detailtable tr:first-child>td:first-child{
-	border-top : 0px solid black;
-	height: 70px;
-	background-color: rgb(239,239,239);
-	font-weight: bold;
-	width: 280px;
-}
-.detailtable tr:first-child>td{
-	border-top : 0px solid black;
-}
-.detailtable tr:nth-child(2)>td{
-	height: 140px;
-}
-/*이미지*/
-.detailtable tr:first-child>td:last-child{
-	border-left : 1px solid black;
-	width: 500px;
-}
-.detailtable tr:first-child>td:last-child>img{
-	width: 300px;
-	margin: 0px;
-	padding : 0px;
-}
-
-.detailtable>*{
-	text-align: center;
-}
-/*장르*/
-.detailtable tr:nth-child(3)>td{
-	height: 70px;
-	background-color: rgb(239,239,239);
-	font-weight: bold;
-}
-.detailtable tr:nth-child(4)>td{
-	height: 140px;
-}
-/*줄거리*/
-.detailtable tr:nth-child(5)>td{
-	height: 70px;
-	background-color: rgb(239,239,239);
-	font-weight: bold;
-}
-.container>*{
-	text-align: center;
-}
 </style>
 </head>
 <body>
@@ -95,8 +44,10 @@ MovieDto moviedetail = movie.detailOne(num);
 				<td colspan=2><%=moviedetail.getMovie_detail() %></td>
 			</tr>
 		</table>
-		<button><a href="update.jsp?num=<%=moviedetail.getNum() %>">수정</a></button>
-		<button><a href="delete.jsp?num=<%=moviedetail.getNum() %>">삭제</a></button>
+		<div>
+			<button><a href="update.jsp?num=<%=moviedetail.getNum() %>">수정</a></button>
+			<button><a href="delete.jsp?num=<%=moviedetail.getNum() %>">삭제</a></button>
+		</div>
 	</div>
 
 </body>

@@ -6,59 +6,13 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" media="screen and (min-width: 830px)" href="../css/crudlist.css" />
+<link rel="stylesheet" type="text/css" media="screen and (max-width: 829px)" href="../css/crudlistMini.css"/>
 <style rel="stylesheet" type="text/css">
-.container>*{
-	text-align: center;
-}
-.detailtable{
-	border: 2px solid black;
-	border-radius: 5px;
-	display: block;
-	width: 800px;
-	margin: 0px auto;
-}
-.detailtable>*{
-	text-align: center;
-}
-.detailtable tr{
-	display: block;
-	border-top: 1px solid black;
-	height: 40px;
-}
-.detailtable tr:hover{
-	background-color: rgb(239,239,239);
+body{
+background-color: rgba(32, 33, 36, 0.6);
 }
 
-.detailtable tr:first-child{
-	border-top: 0px solid black;
-	font-weight: bold;
-}
-.detailtable tr>td{
-	height: 40px;
-	display: inline-block;
-	overflow: hidden;
-	line-height: 40px;
-}
-.detailtable tr>td:first-child{
-	width : 60px;
-}
-.detailtable tr>td:first-child>a{
-	text-decoration: none;
-	color: black;
-}
-.detailtable tr>td:nth-child(2){
-	width : 100px;
-}
-.detailtable tr>td:nth-child(2)>a{
-	text-decoration: none;
-	color: black;
-}
-.detailtable tr>td:nth-child(3){
-	width : 100px;
-}
-.detailtable tr>td:last-child{
-	width : 500px;
-}
 </style>
 </head>
 <%

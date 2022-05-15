@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*, com.sjh0120.cinema.*, java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,6 @@
 </script>
 <body>
 <%
-System.out.println(request.getMethod());
 request.setCharacterEncoding("utf-8");
 if(request.getMethod().equals("POST")){
 	String[] params={

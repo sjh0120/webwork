@@ -7,24 +7,10 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/crudupdate.css"/>
 <style rel="stylesheet" type="text/css">
-@media screen and (max-width: 600px){
-	body{
-		background-color: red;
-	}
-}
-.detailtable{
-	border: 2px solid black;
-	border-radius: 5px;
-	width: 800px;
-	height : 800px;
-	margin: 0px auto;
-}
-.detailtable td{
-	border-top : 1px solid black;
-}
-.container>*{
-	text-align: center;
+body{
+background-color: rgba(32, 33, 36, 0.6);
 }
 </style>
 <script type="text/javascript">
@@ -103,9 +89,9 @@ MovieDto moviedetail = movie.detailOne(num);
 				<td><input type="text" name="movie_detail" id="movie_detail" /></td>
 			</tr>
 		</table>
-		<button>수정완료</button>
+		<button id="btn">수정완료</button>
 		</form>
-		<button><a href="./list.jsp">취소</a></button>
+		<button id="btn"><a href="./list.jsp">취소</a></button>
 	</div>
 
 </body>

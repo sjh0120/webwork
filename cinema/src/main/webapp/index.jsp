@@ -153,9 +153,7 @@
 
 </style>
 <script src="js/jquery-1.12.4.min.js"></script>
-
 <script src="js/jquery.bxslider.js"></script>
-
 <script type="text/javascript">
 
 var current;
@@ -186,6 +184,7 @@ var option = {
 		/* window.addEventListener('resize', function() {
 		    
 		}); */
+		//insert
 		$('#insert_popup').hide();
 		$('.button_zone_insert').click(function() {
 			$('#insert_popup').show();
@@ -281,13 +280,10 @@ var option = {
 				$('#detail_popup').hide();
 				location.reload();
 			});
-			//location.reload();
-			//끝
-			//$('#detail_popup').hide();
 			return false;
 		});
 
-		//애니메이션
+		//줄거리 애니메이션
 		var moving = $('.main_block>div').mouseover(function() {
 			interval = setInterval(slideUp, 100);
 		});
@@ -300,30 +296,27 @@ var option = {
 		});
 	});
 </script>
+<!-- 배경색 변경 -->
 <script type="text/javascript">
-//배경색 변경
 $(window)
 		.scroll(
 				function() {
-					// selectors
+					// 패널선택
 					var $window = $(window), $body = $('body'), $panel = $('.panel');
 
-					// Change 33% earlier than scroll position so colour is there when you arrive.
+					// 도착 3/1 전에 색 변경 시작
 					var scroll = $window.scrollTop()
 							+ ($window.height() / 3);
 
 					$panel
 							.each(function() {
 								var $this = $(this);
-
-								// if position is within range of this panel.
-								// So position of (position of top of div <= scroll position) && (position of bottom of div > scroll position).
-								// Remember we set the scroll to 33% earlier in scroll var.
+								//포지션 정보 저장
 								if ($this.position().top <= scroll
 										&& $this.position().top
 												+ $this.height() > scroll) {
 
-									// Remove all classes on body with color-
+									// 색깔 클래스 제거
 									$body
 											.removeClass(function(index,
 													css) {
@@ -332,12 +325,11 @@ $(window)
 														.join(' ');
 											});
 
-									// Add class of currently active div
+									// 색깔 클래스 부여
 									$body.addClass('color-'
 											+ $(this).data('color'));
 								}
 							});
-
 				}).scroll();
 </script>
 <title>Movie Theater</title>
@@ -427,45 +419,28 @@ $(window)
 	<div id="detail_popup">
 		<div>
 			<h2>상세 페이지</h2>
-			<form action="#" method="POST">
-			</form>
 			<table id="detail_table">
-			<tr>
-			<td>제목</td>
-			<td rowspan="4"><img src=<jsp:getProperty property="movie_image" name="moviedetail"/> /></td>
-			</tr>
-			<tr>
-			<td><jsp:getProperty property="movie_name" name="moviedetail"/></td>
-			</tr>
-			<tr>
-			<td>장르</td>
-			</tr>
-			<tr>
-			<td><jsp:getProperty property="movie_genre" name="moviedetail"/></td>
-			</tr>
-			<tr>
-			<td colspan="2">줄거리</td>
-			</tr>
-			<tr>
-			<td colspan="2"><p><jsp:getProperty property="movie_detail" name="moviedetail"/></p></td>
-			</tr>
+				<tr>
+					<td>제목</td>
+					<td rowspan="4"><img src=<jsp:getProperty property="movie_image" name="moviedetail"/> /></td>
+				</tr>
+				<tr>
+					<td><jsp:getProperty property="movie_name" name="moviedetail"/></td>
+				</tr>
+				<tr>
+					<td>장르</td>
+				</tr>
+				<tr>
+					<td><jsp:getProperty property="movie_genre" name="moviedetail"/></td>
+				</tr>
+				<tr>
+					<td colspan="2">줄거리</td>
+				</tr>
+				<tr>
+					<td colspan="2"><p><jsp:getProperty property="movie_detail" name="moviedetail"/></p></td>
+				</tr>
 			</table>
-				<!-- <div id="namebox">
-				
-				</div>
-				<div id="imgbox">
-					
-				</div>
-				<div id="genrebox">
-					<label for="movie_genre">장르</label>
-					<input type="text" readonly="readonly" value=''/>
-				</div>
-				<div id="detailbox">
-					<label for="movie_detail">줄거리</label>
-					<input type="text" readonly="readonly" value=''/>
-				</div>
-				<div> -->
-					<button type="button">뒤로</button>
+			<button type="button">뒤로</button>
 		</div>
 	</div>
 </body>

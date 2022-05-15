@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+.container{
+	display:block;
+	width: 600px;
+	background-color: white;
+	border-radius: 20px;
+	border:0px solid auto;
+	margin: 80px auto;
+	padding-bottom: 30px;
+	
+}
+.container>h2{
+	padding-top: 30px;
+}
+.detailtable{
+	border: 2px solid black;
+	border-radius: 5px;
+	width: 400px;
+	margin: 0px auto;
+}
+.detailtable td{
+	border-top : 1px solid black;
+}
+
+/*제목*/
+.detailtable tr:first-child>td:first-child{
+	border-top : 0px solid black;
+	height: 30px;
+	background-color: rgb(239,239,239);
+	font-weight: bold;
+	width: 280px;
+}
+
+.detailtable tr:nth-child(2)>td:first-child{
+	display: block;
+	height: 60px;
+	line-height: 60px;
+}
+
+.detailtable tr:first-child>td{
+	border-top : 0px solid black;
+}
+/*이미지*/
+.detailtable tr:first-child>td:last-child{
+	border-left : 0px solid black;
+	width: 0px;
+}
+.detailtable tr:first-child>td:last-child>img{
+	width: 0px;
+	margin: 0px;
+	padding : 0px;
+}
+
+.detailtable>*{
+	text-align: center;
+}
+/*장르*/
+.detailtable tr:nth-child(3)>td{
+	height: 30px;
+	background-color: rgb(239,239,239);
+	font-weight: bold;
+}
+.detailtable tr:nth-child(4)>td{
+	height: 60px;
+	line-height: 60px;
+}
+/*줄거리*/
+.detailtable tr:nth-child(5)>td{
+	height: 30px;
+	background-color: rgb(239,239,239);
+	font-weight: bold;
+}
+.container>*{
+	text-align: center;
+}
+/*버튼*/
+.container>div{
+	width: 300px;
+	height: 40px;
+	text-align: center;
+	margin: 20px auto;
+}
+.container>div>button{
+	width: 100px;
+	height: 40px;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+.container>div>button>a{
+	text-decoration: none;
+	color: black;
+	size: 25pt;
+}
