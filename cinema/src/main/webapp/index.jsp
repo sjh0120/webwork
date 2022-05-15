@@ -70,7 +70,7 @@
 		margin : 0px auto;
 		width : 600px;
 		height : 400px;
-		border: 1px solid black;
+		border: 2px solid black;
 		border-radius: 10px;
 		padding: 0px;
 		box-sizing: border-box;
@@ -83,7 +83,27 @@
 	#detail_table td{
 		border-bottom:1px solid black;
 	}
+	/*제목*/
+	#detail_table tr:first-child>td:first-child{
+		height: 25px;
+		background-color: rgb(239,239,239);
+		font-weight:bold;
+	}
+	#detail_table tr:nth-child(2)>td:first-child{
+		height: 112.5px;
+	}
 	
+	/*장르*/
+	#detail_table tr:nth-child(3)>td:first-child{
+		height: 25px;
+		background-color: rgb(239,239,239);
+		font-weight:bold;
+	}
+	#detail_table tr:nth-child(4)>td:first-child{
+		height: 112.5px;
+	}
+	
+	/*이미지*/
 	#detail_table tr:nth-child(1)>td:last-child{
 		border-left:1px solid black;
 		width: 400px;
@@ -91,16 +111,23 @@
 	#detail_table tr:nth-child(1)>td:last-child>img{
 		width: 200px;
 	}
-		
+	
+	/*줄거리*/
+	#detail_table tr:nth-child(5)>td{
+		height: 25px;
+		background-color: rgb(239,239,239);
+		font-weight:bold;
+	}
 	#detail_table tr:last-child>td{
 		border-bottom:0px solid black;
 		overflow: hidden;
 	}
-	
 	#detail_table tr:last-child>td>p{
 		margin: 0px;
 		padding: 0px;
 	}
+	
+	
 	#detail_popup>div>button{
 		display: block;
 		width: 400px;
@@ -262,6 +289,7 @@ var option = {
 			//숨기기 + 내용 비우기
 			$.post('db/detailout.jsp',function(){
 				$('#detail_popup').hide();
+				location.reload();
 			});
 			//location.reload();
 			//끝
