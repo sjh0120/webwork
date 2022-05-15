@@ -8,8 +8,6 @@
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
-if (current > total)
-	current = current - total;
 </script>
 <body>
 <%
@@ -29,8 +27,6 @@ if(request.getMethod().equals("POST")){
 		
 		String sql="insert into movie_board (movie_name,movie_image,movie_genre,movie_detail) values ('"
 			+movieName+"','"+movieImage+"','"+movieGenre+"','"+movieDetail+"')";
-			
-		System.out.println("sql : "+sql);
 
 		String driver="com.mysql.cj.jdbc.Driver";
 		String url="jdbc:mysql://localhost:3306/board";

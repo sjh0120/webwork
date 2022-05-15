@@ -58,6 +58,11 @@ body {
 	border: 0.3px solid black;
 }
 
+.button_zone>.button_zone_delete>button>a {
+	text-decoration: none;
+	color: black;
+}
+
 .panel {
 	min-height: 1000px;
 	display: flex;

@@ -49,15 +49,16 @@ public class DBcrud {
 		}
 	}
 	
-	public MovieDto detailOne(Number num) throws ClassNotFoundException,SQLException{
+	public MovieDto detailOne(Integer num) throws ClassNotFoundException,SQLException{
 		MovieDto movie = new MovieDto();
-		String sql="select * from movie_board where="+num;
+		String sql="select * from movie_board where num="+num+";";
 		try(
 				Connection conn=DBServer.getConnection();
 				Statement stmt=conn.createStatement();
 				ResultSet rs=stmt.executeQuery(sql);
 				){
 			if(rs.next()) {
+				movie.setNum(rs.getInt("num"));
 				movie.setMovie_name(rs.getString("movie_name"));
 				movie.setMovie_image(rs.getString("movie_image"));
 				movie.setMovie_genre(rs.getString("movie_genre"));
@@ -67,5 +68,24 @@ public class DBcrud {
 		}
 		return movie;
 	}
-	
+	public boolean updateOne(Integer num, String image, String genre, String detail) throws ClassNotFoundException,SQLException{
+		String sql="update movie_board set movie_image='"+image.trim()
+					+"', movie_genre='"+genre.trim()
+					+"', movie_detail='"+detail.trim()+"' where num="+num+";";
+		try(
+				Connection conn=DBServer.getConnection();
+				Statement stmt=conn.createStatement();
+				){
+			return stmt.executeUpdate(sql)>0;
+		}
+	}
+	public boolean deleteOne(Integer num) throws ClassNotFoundException,SQLException{
+		String sql="delete from movie_board where num="+num+";";
+		try(
+				Connection conn=DBServer.getConnection();
+				Statement stmt=conn.createStatement();
+				){
+			return stmt.executeUpdate(sql)>0;
+		}
+	}
 }

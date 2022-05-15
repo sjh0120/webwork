@@ -33,8 +33,6 @@
 		box-sizing:border-box;/*사이즈 고정*/
 		border-radius: 20px;
 	}
-	
-	
 	#detail_popup>div>form{}
 	#detail_popup>div>form>div{
 		margin-bottom:10px;
@@ -127,7 +125,6 @@
 		padding: 0px;
 	}
 	
-	
 	#detail_popup>div>button{
 		display: block;
 		width: 400px;
@@ -156,10 +153,8 @@
 
 </style>
 <script src="js/jquery-1.12.4.min.js"></script>
-<!-- 여기로 올림 -->
 
 <script src="js/jquery.bxslider.js"></script>
-
 
 <script type="text/javascript">
 
@@ -185,24 +180,12 @@ var option = {
 		$('.card_items:hover .main_block>div').animate(
 				{marginTop : parseInt($('.card_items:hover .main_block>div').css('margin-top'))-10 + 'px'}
 				, 100);
-
-		//console.log($('.card_items:hover .main_block>div').css('margin-top'));
-		//끝나는 위치가 제각각이네....
 	}
 
 	$(function() {
-		window.addEventListener('resize', function() {
-		    console.log(window.innerWidth);
-		    if(window.innerWidth > 980){
-				count=3;
-			}else if(window.innerWidth <=980 && window.innerWidth > 700 ){
-				count=2;
-			}else{
-				count=1;
-			}
-		});
-		//insert
-		//$('#insert_popup').hide();
+		/* window.addEventListener('resize', function() {
+		    
+		}); */
 		$('#insert_popup').hide();
 		$('.button_zone_insert').click(function() {
 			$('#insert_popup').show();
@@ -229,9 +212,16 @@ var option = {
 			});
 		};
 		$('#insert_popup form').on('submit', function(e) {
-			var param = $(e.target).serialize();
-			addList(param);
-			return false;
+			$('#insert_popup .err').remove();
+			var lastval=$('#input_box').children().last().val();
+			if(lastval==''){
+				$('#insert_popup .err').remove();
+				$('#insert_popup h2').before('<div class="err">공백, 중복된 이름은 입력할 수 없습니다</div>');
+				return false;
+			}else{
+				var param = $(e.target).serialize();
+				addList(param);
+			}
 		});
 
 		//detail
@@ -395,7 +385,7 @@ $(window)
 			<button>+</button>
 		</div>
 		<div class="button_zone_delete">
-			<button>-</button>
+			<button><a href="crud/list.jsp">-</a></button>
 		</div>
 	</div>
 

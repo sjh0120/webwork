@@ -44,7 +44,6 @@ $(function(){
 Connection conn;
 Statement stmt;
 ResultSet rs;
-
 %>
 <jsp:useBean id="bean" class="com.bit.util.EmpDto"></jsp:useBean>
 <jsp:setProperty property="empno" name="bean"/>
