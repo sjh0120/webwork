@@ -12,7 +12,9 @@
 body{
 background-color: rgba(32, 33, 36, 0.6);
 }
-
+.detailtable tr:first-child:hover{
+	background-color: white;
+}
 </style>
 </head>
 <%
