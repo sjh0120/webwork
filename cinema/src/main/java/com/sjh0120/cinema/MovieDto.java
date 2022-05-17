@@ -45,6 +45,11 @@ public class MovieDto {
 	public void setMovie_detail(String movie_detail) {
 		this.movie_detail = movie_detail;
 	}
+	@Override
+	public String toString() {
+		return "MovieDto [movie_name=" + movie_name + ", movie_image=" + movie_image + ", movie_genre=" + movie_genre
+				+ ", movie_detail=" + movie_detail + ", result=" + result + ", num=" + num + "]";
+	}
 	
 	
 }

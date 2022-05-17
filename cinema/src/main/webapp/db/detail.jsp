@@ -13,7 +13,7 @@ System.out.println(request.getMethod());
 request.setCharacterEncoding("utf-8");
 if(request.getMethod().equals("POST")){
 	int slidnum=Integer.parseInt(request.getParameter("current"));
-	
+	System.out.println(request.getParameter("current"));
 	String sql="select * from movie_board where num="+slidnum+";";
 			
 	System.out.println("sql : "+sql);
@@ -46,6 +46,8 @@ if(request.getMethod().equals("POST")){
 		if(stmt!=null)stmt.close();
 		if(conn!=null)conn.close();
 	}
+session.setAttribute("moviedetail", moviedetail);
+//System.out.println(moviedetail.toString());
 response.sendRedirect("../");
 }
 %>

@@ -231,7 +231,7 @@ var option = {
 			current = slider.getCurrentSlide() + 2;//현재슬라이드 번호
 			if (current > total)
 				current = current - total;
-			
+			console.log(current);
 			<%-- <%
 			DBcrud moviedetail2=new DBcrud();
 			MovieDto moviedetail_return2=moviedetail2.detailOne(3);
@@ -250,22 +250,24 @@ var option = {
 			//작업중
 			//detail.
 			
-			/* $.ajax({
+			 $.ajax({
 				type:'post',
-				url:'bbs/update.jsp',
-				data:param,
+				url:'db/detail.jsp',
+				data:'current='+current,
 				error:function(a,b,c){
 					console.log(b,c);
 				},
 				success:function(){
-					$('#menu a').eq(2).click();
-					$('#popup').click();
+					//jspbean 받아오기
+					var n = sessionStorage;
+					console.log(n);
+					$('#detail_popup').show();
 				}
 			});
-			 */
-			$.post('db/detail.jsp','current='+current,function(){
-				$('#detail_popup').show();
-			});
+			 
+			//$.post('db/detail.jsp','current='+current,function(){
+				//$('#detail_popup').show();
+			//});
 			
 			//디테일창 안에서의 html db값으로 변경 => 디테일창 완성
 
@@ -334,7 +336,7 @@ $(window)
 </script>
 <title>Movie Theater</title>
 </head>
-<jsp:useBean id="moviedetail" class="com.sjh0120.cinema.MovieDto" scope="session"></jsp:useBean>
+
 <%
 	DBcrud movie=new DBcrud();
 	ArrayList<MovieDto> list= movie.getList();
@@ -420,6 +422,9 @@ $(window)
 		<div>
 			<h2>상세 페이지</h2>
 			<table id="detail_table">
+			<jsp:useBean id="moviedetail" class="com.sjh0120.cinema.MovieDto" scope="session" ></jsp:useBean>
+			<%=session.getAttribute("moviedetail").toString() %>
+			<!-- jsp usebean을 여기서 새로 갱신시키면 -->
 				<tr>
 					<td>제목</td>
 					<td rowspan="4"><img src=<jsp:getProperty property="movie_image" name="moviedetail"/> /></td>
