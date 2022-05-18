@@ -46,7 +46,7 @@ if(request.getMethod().equals("POST")){
 		if(stmt!=null)stmt.close();
 		if(conn!=null)conn.close();
 	}
-session.setAttribute("moviedetail", moviedetail);
+request.setAttribute("moviedetail", moviedetail);
 //System.out.println(moviedetail.toString());
 response.sendRedirect("../");
 }

@@ -232,10 +232,6 @@ var option = {
 			if (current > total)
 				current = current - total;
 			console.log(current);
-			<%-- <%
-			DBcrud moviedetail2=new DBcrud();
-			MovieDto moviedetail_return2=moviedetail2.detailOne(3);
-			%> --%>
 			
 			//여기
 			//var items=document.getElementById('#detail_popup');
@@ -259,8 +255,6 @@ var option = {
 				},
 				success:function(){
 					//jspbean 받아오기
-					var n = sessionStorage;
-					console.log(n);
 					$('#detail_popup').show();
 				}
 			});
