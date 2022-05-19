@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee                       http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<welcome-file-list>
+	<welcome-file>index.html</welcome-file>
+</welcome-file-list>
+<servlet>
+	<servlet-name>index</servlet-name>
+	<servlet-class>com.bit.emp.controller.IndexController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>index</servlet-name>
+	<url-pattern>/index.html</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>index</servlet-name>
+	<url-pattern>/home.html</url-pattern>
+</servlet-mapping>
+
+<servlet>
+	<servlet-name>empList</servlet-name>
+	<servlet-class>com.bit.emp.controller.ListController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>empList</servlet-name>
+	<url-pattern>/emp.html</url-pattern>
+</servlet-mapping>
+
+<servlet>
+	<servlet-name>empAdd</servlet-name>
+	<servlet-class>com.bit.emp.controller.AddController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>empAdd</servlet-name>
+	<url-pattern>/empAdd.html</url-pattern>
+</servlet-mapping>
+<servlet>
+	<servlet-name>empOne</servlet-name>
+	<servlet-class>com.bit.emp.controller.EmpController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>empOne</servlet-name>
+	<url-pattern>/empOne.html</url-pattern>
+</servlet-mapping>
+<servlet>
+	<servlet-name>empDel</servlet-name>
+	<servlet-class>com.bit.emp.controller.DelController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>empDel</servlet-name>
+	<url-pattern>/delEmp.html</url-pattern>
+</servlet-mapping>
+
+
+
+
+
+
+</web-app>

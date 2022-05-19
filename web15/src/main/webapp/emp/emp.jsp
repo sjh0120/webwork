@@ -56,7 +56,7 @@ $(function(){
 					<h1>EMP Detail Page <small>상세보기</small></h1>
 				</div>
 				<%
-				com.bit.model.EmpDto bean=(com.bit.model.EmpDto)request.getAttribute("emp");
+					com.bit.model.EmpDto bean=(com.bit.model.EmpDto)request.getAttribute("emp");
 				%>
 				<form method="post">
 				  <div class="form-group">

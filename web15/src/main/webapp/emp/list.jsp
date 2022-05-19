@@ -65,9 +65,9 @@
 					</thead>
 					<tbody>
 					<%
-					java.util.List<com.bit.model.EmpDto> list=null;
-					list=(java.util.List<com.bit.model.EmpDto>)request.getAttribute("list");
-					for(com.bit.model.EmpDto bean:list){
+						java.util.List<com.bit.model.EmpDto> list=null;
+								list=(java.util.List<com.bit.model.EmpDto>)request.getAttribute("list");
+								for(com.bit.model.EmpDto bean:list){
 					%>
 					<tr>
 					<td><a href="detail.html?idx=<%=bean.getEmpno() %>"><%=bean.getEmpno() %></a></td>
