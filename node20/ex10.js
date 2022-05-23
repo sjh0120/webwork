@@ -1,0 +1,1 @@
+console.log(process.env.MYSQL_USER,process.env.MYSQL_PASSWORD);
